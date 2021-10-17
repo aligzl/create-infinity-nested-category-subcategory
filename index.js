@@ -401,15 +401,15 @@ const  dropdown = [
       ]
 
     const  reduceArrayDimension = (array, parent = '') => {
-      const level = [];
-
-      array.forEach(item => {
-        const ids = {name: item.name, id: item.id,  parent: `${parent}/${item.id}`}
-        level.push(ids);
-        if (item.children) level.push(...reduceArrayDimension(item.children, ids.parent));
-      });
-
-      return level;
-    }
+        const level = [];
+        
+        array.forEach(item => {
+          const ids = {name: item.name, parent: parent || '/',  category: `${parent}/${item.id}`}
+          level.push(ids);
+          if (item.children) level.push(...reduceArrayDimension(item.children, ids.category));
+        });
+        
+        return level;
+      }
 
     console.log(reduceArrayDimension(dropdown))
